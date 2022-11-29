@@ -1,1 +1,13 @@
-This is the first file edit in the terminal
+Crimson
+Orange
+Blue
+Cyan
+Yellow
+Charcoal
+Khaki
+Coral
+Silver
+Fuchsia
+Purple
+Brown
+[A[3~[3~[3~[F[B[F[C[[F[B[C[C[C[C[[
