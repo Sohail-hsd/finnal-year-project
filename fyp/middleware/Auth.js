@@ -9,16 +9,15 @@ mongoose.set('strictQuery', true);
 // Step # 4 : If token is not verified, Return Error.
 
 const Auth = handler => async (req, res) => {
-    const { authorization } = req.body
     // if (req.method == 'POST') {
         try {
-            console.log("first")
+            console.log("Auth")
             return new Promise((resolve, reject) => {
                 let token = req.headers.authorization
                 // Verifing Authorization token --- [Done]
                 jwt.verify(token, process.env.JWT_SECRET_KEY, async (err, decoded) => {
                     if (err) {
-                        res.status(401).json({ status: false, Error: "Invaid User session Token" });
+                        res.status(401).json({ status: false, Error: "Invaid User session Token",err });
                         reject()
                     }
                     else if (decoded.id) {

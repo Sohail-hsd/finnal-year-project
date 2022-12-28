@@ -19,9 +19,9 @@ export const handler = async (req, res) => {
                 if (user) {
                     const bytes = CryptoJS.AES.decrypt(user.password, `${process.env.PASSWORD_SECRET_KEY}`)
                     const decryptedPassword = bytes.toString(CryptoJS.enc.Utf8)
-                    console.log(decryptedPassword)
+                    // console.log(decryptedPassword)
                 if (req.body.password === decryptedPassword) {
-                    const token = jwt.sign({ email: user.email, id: user._id }, `${process.env.JWT_SECRET_KEY}`, { expiresIn: '2d' });
+                    const token = jwt.sign({ email: user.email, id: user._id }, `${process.env.JWT_SECRET_KEY}`);
                     return res.status(200).json({ status: true, email: user.email, name: user.name, token })
                 }
                 

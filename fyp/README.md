@@ -1,14 +1,43 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
 
-First, run the development server:
+## Installation
 
+This app requires [Node.js](https://nodejs.org/) v10+ to run.
+
+Install the dependencies and devDependencies and start the server.
+### using npm
 ```bash
+cd finnal-year-project/fyp
+npm i
 npm run dev
 # or
+yarn install
 yarn dev
 ```
+### using yarn
+```sh
+yarn install
+yarn dev
+```
+### for `.env.local` file
+
+create `.env.local` file in `/finnal-year-project/fyp` and past the following local env variables.
+
+```sh
+MONGO_URI=mongodb://127.0.0.1:27017/fyp
+PASSWORD_SECRET_KEY=THEIS_IS_THE_KEY_FOR_SECRETE
+ADMIN_PASSWORD_SECRET_KEY=THEIS_IS_THE_ADMIN_KEY_FOR_SECRETE
+JWT_SECRET_KEY=THEIS_IS_THE_SECRETE_KEY_FOR_JWT
+ADMIN_JWT_SECRET_KEY=THEIS_IS_THE_ADMIN_SECRETE_KEY_FOR_JWT
+```
+```sh
+
+For production environments...
+npm install --production
+NODE_ENV=production node app
+```
+
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
