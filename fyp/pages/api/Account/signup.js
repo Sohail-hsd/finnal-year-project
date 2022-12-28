@@ -7,12 +7,14 @@ const handler = async (req, res) => {
     if (req.method == 'POST') {
         try {
             const { name, email, address, areaPinCode, city, state, phone, password } = req.body
-            console.log(req.body.password)
-            let check = await User.findOne({ email })
-            if (!check) {
-                const cyperText = CryptoJS.AES.encrypt(password, process.env.PASSWORD_SECRET_KEY).toString()
-                let user = new User({ name, email, password: cyperText })
-                let { _id } = await user.save()
+            if(name, email, address, areaPinCode, city, state, phone, password){
+
+                console.log(req.body.password)
+                let check = await User.findOne({ email })
+                if (!check) {
+                    const cyperText = CryptoJS.AES.encrypt(password, process.env.PASSWORD_SECRET_KEY).toString()
+                    let user = new User({ name, email, password: cyperText })
+                    let { _id } = await user.save()
                 console.log(_id)
                 let userInfo = new UserInfo({ userId: _id, name, address, areaPinCode, city, district: state, phone })
                 await userInfo.save()
@@ -20,7 +22,8 @@ const handler = async (req, res) => {
             } else {
                 res.status(400).json({ status: false, Error: 'Invalid Credentials' })
             }
-
+        } else return res.status(501).json({status:false, Error: "Invalid arguments"})
+            
         } catch (error) {
             console.error({ error: error })
             res.status(400).json({ status: false, Error: 'Internal Srever Error' })

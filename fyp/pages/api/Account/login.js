@@ -13,23 +13,26 @@ export const handler = async (req, res) => {
     if (req.method == 'POST') {
         try {
             const { email, password } = req.body
-            let user = await User.findOne({ email: email })
-            if (user) {
-                const bytes = CryptoJS.AES.decrypt(user.password, `${process.env.PASSWORD_SECRET_KEY}`)
-                const decryptedPassword = bytes.toString(CryptoJS.enc.Utf8)
-                console.log(decryptedPassword)
+            if(email, password){
+
+                let user = await User.findOne({ email: email })
+                if (user) {
+                    const bytes = CryptoJS.AES.decrypt(user.password, `${process.env.PASSWORD_SECRET_KEY}`)
+                    const decryptedPassword = bytes.toString(CryptoJS.enc.Utf8)
+                    console.log(decryptedPassword)
                 if (req.body.password === decryptedPassword) {
                     const token = jwt.sign({ email: user.email, id: user._id }, `${process.env.JWT_SECRET_KEY}`, { expiresIn: '2d' });
                     return res.status(200).json({ status: true, email: user.email, name: user.name, token })
                 }
-
+                
                 return res.status(403).json({ status: false, Error: "Invalid Email Or Password" })
-
+                
             } else {
                 return res.status(403).json({ status: false, Error: "Invalid Email Or Password" })
             }
-
-
+            
+        }else return res.status(501).json({status:false, Error: "Invalid arguments"})
+            
         } catch (error) {
             res.status(500).json({ status: 'internal server error' })
         }

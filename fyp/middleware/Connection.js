@@ -9,7 +9,7 @@ const connectDB = handler => async (req, res) => {
         return handler(req, res)
     }
     mongoose.connect(process.env.MONGO_URI)
-    console.log("Connected")
+    console.log("Connected",process.env.MONGO_URI)
     return handler(req, res)
 }
 
