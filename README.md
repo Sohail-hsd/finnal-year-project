@@ -22,6 +22,8 @@ yarn dev
 ```
 ### for `.env.local` file
 
+create `.env.local` file in `/finnal-year-project/fyp` and past the following local env variables.
+
 ```sh
 MONGO_URI=mongodb://127.0.0.1:27017/fyp
 PASSWORD_SECRET_KEY=THEIS_IS_THE_KEY_FOR_SECRETE
