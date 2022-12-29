@@ -9,7 +9,7 @@ const OrderSchema = new mongoose.Schema({
     email: { type: String, required: true },
     name: { type: String, required: true },
     phone: { type: String, required: true },
-    orderID: { type: String, required: true },
+    orderID: { type: String, required: true, unique: true },
     transactionID: { type: String },
     paymentInfo: { type: String, default: '' },
     products: { type: Object, required: true }, // Object that will store all the order products.

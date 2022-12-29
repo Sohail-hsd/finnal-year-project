@@ -1,7 +1,4 @@
-const mongoose = require('mongoose')
 const jwt = require('jsonwebtoken')
-
-mongoose.set('strictQuery', true);
 
 // Step # 1 : Verify the token, sent by client.
 // Step # 2 : If token is verified, Set the req.userId = to the doceded id from the token.

@@ -1,7 +1,7 @@
-import Order from "../../../model/Order";
+import Order from "../../../models/Order";
 import connectDB from "../../../middleware/Connection";
 import Auth from "../../../middleware/Auth";
-import Product from "../../../model/Product";
+import Product from "../../../models/Product";
 // import pincodes from '../../../pincodes.json'
 
 const handler = async (req, res) => {
@@ -15,15 +15,17 @@ const handler = async (req, res) => {
       product = await Product.findOne({ slug: item });
 
       // Chack if the cart item is out of stock --- [Done]
+      console.log(product.availableQty < cart[item].qty)
       if (product.availableQty < cart[item].qty) {
         return res
-          .status(403)
-          .json({
-            success: false,
-            error: "Sorry! The products is not available in that much quantity.",
-          });
+        .status(403)
+        .json({
+          success: false,
+          error: "Sorry! The products is not available in that much quantity.",
+        });
       }
-
+      
+      console.log(product.price !== cart[item].price)
       if (product.price !== cart[item].price) {
         return res
           .status(403)
@@ -45,28 +47,31 @@ const handler = async (req, res) => {
     //       error: "The pin code you have enter is not serviceable.",
     //     });
     // }
+    console.log(sumTotal !== req.body.SubTotal)
     if (sumTotal !== req.body.SubTotal) {
       return res
-        .status(403)
-        .json({
-          success: false,
-          cart: "clear",
-          error:
-            "The price of some products in  your cart is changed. Please try again",
-        });
+      .status(403)
+      .json({
+        success: false,
+        cart: "clear",
+        error:
+        "The price of some products in  your cart is changed. Please try again",
+      });
     }
     // if (req.body.SubTotal <= 0) {
-    //   return res
-    //     .status(403)
-    //     .json({
-    //       success: false,
-    //       cart: "clear",
-    //       error: "Please, Build your cart and try again.",
-    //     });
-    // }
-    if (
-      req.body.phone.length < 11 ||
-      !Number.isInteger(Number(req.body.phone))
+      //   return res
+      //     .status(403)
+      //     .json({
+        //       success: false,
+        //       cart: "clear",
+        //       error: "Please, Build your cart and try again.",
+        //     });
+        // }
+        console.log(req.body.phone.length < 11 ||
+          !Number.isInteger(Number(req.body.phone)))
+        if (
+          req.body.phone.length < 11 ||
+          !Number.isInteger(Number(req.body.phone))
     ) {
       return res
         .status(403)
@@ -75,6 +80,7 @@ const handler = async (req, res) => {
           error: "Please, Enter a valid phone number of 11 digits.",
         });
     }
+    console.log(req.body.pin.length > 5 || !Number.isInteger(Number(req.body.pin)))
     if (req.body.pin.length > 5 || !Number.isInteger(Number(req.body.pin))) {
       return res
         .status(403)
@@ -85,7 +91,7 @@ const handler = async (req, res) => {
 
     // Initiate an Order, Coressponding ot this OrderId. --- [Done]
     try {
-      // console.log(req.body)
+      // console.log(Math.random(30))
       let order = new Order({
         email: req.body.email,
         name: req.body.name,
