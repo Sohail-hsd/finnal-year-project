@@ -1,5 +1,5 @@
 import connectDB from "../../../middleware/Connection"
-import User from '../../../model/User'
+import User from '../../../models/User'
 const CryptoJS = require('crypto-js');
 const jwt = require('jsonwebtoken');
 var nodemailer = require('nodemailer');

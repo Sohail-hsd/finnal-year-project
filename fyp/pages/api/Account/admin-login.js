@@ -1,6 +1,6 @@
 import connectDB from "../../../middleware/Connection"
-import Admin from '../../../model/Admin'
-import AdminAuth from '../../../middleware/AdminAuth'
+import Admin from '../../../models/Admin'
+// import AdminAuth from '../../../middleware/AdminAuth'
 const CryptoJS = require('crypto-js');
 const jwt = require('jsonwebtoken');
 

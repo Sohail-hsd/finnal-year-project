@@ -1,6 +1,6 @@
 // import AdminInfo from '../../../model/AdminInfo';
 import connectDB from "../../../middleware/Connection"
-import Admin from '../../../model/Admin';
+import Admin from '../../../models/Admin';
 const CryptoJS = require('crypto-js');
 
 const handler = async (req, res) => {
