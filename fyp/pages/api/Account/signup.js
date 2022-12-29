@@ -1,6 +1,6 @@
-import UserInfo from '../../../model/UserInfo';
+import UserInfo from '../../../models/UserInfo';
 import connectDB from "../../../middleware/Connection"
-import User from '../../../model/User'
+import User from '../../../models/User'
 const CryptoJS = require('crypto-js');
 
 const handler = async (req, res) => {

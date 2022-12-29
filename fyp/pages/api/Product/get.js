@@ -1,4 +1,4 @@
-import Product from "../../../model/Product";
+import Product from "../../../models/Product";
 import connectDB from "../../../middleware/Connection";
 
 const handler = async (req, res) => {
