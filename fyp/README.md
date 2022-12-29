@@ -30,10 +30,36 @@ PASSWORD_SECRET_KEY=THEIS_IS_THE_KEY_FOR_SECRETE
 ADMIN_PASSWORD_SECRET_KEY=THEIS_IS_THE_ADMIN_KEY_FOR_SECRETE
 JWT_SECRET_KEY=THEIS_IS_THE_SECRETE_KEY_FOR_JWT
 ADMIN_JWT_SECRET_KEY=THEIS_IS_THE_ADMIN_SECRETE_KEY_FOR_JWT
+NEXT_PUBLIC_HOST=http://localhost:3000
 ```
+## Api Requests `/api/Payment/pre-payment`
 ```sh
+{
+  "email": "intel@gmail2919.com",
+  "name": "Sohial HSD",
+  "phone": "03329211550",
+  "orderID": "03329211550",
+  "address": "Paksitan",
+  "district": "Swat",
+  "state": "KPK",
+  "pin": "23250",
+  "SubTotal": 499,
+  "cart": {
+    "HSD T-Shirt branded": {
+      "title": "T-Shirt",
+      "category": "T-shirt",
+      "price": 499,
+      "size": "S",
+      "color": "green",
+      "qty": 1
+    }
+  }
+}
+
+```
 
 For production environments...
+```sh
 npm install --production
 NODE_ENV=production node app
 ```
