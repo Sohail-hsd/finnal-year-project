@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
-import Admin from "../models/Admin";
+import SuperAdmin from "../models/SuperAdmin";
 
 mongoose.set("strictQuery", true);
 
@@ -10,16 +10,15 @@ mongoose.set("strictQuery", true);
 // Step # 4 : If token is not verified, Return Error.
 
 const AdminAuth = (handler) => async (req, res) => {
-  const { authorization } = req.body;
   // if (req.method == 'POST') {
   try {
-    console.log("Admin-Auth");
+    console.log("Super-Admin-Auth");
     return new Promise((resolve, reject) => {
       let token = req.headers.authorization;
       // Verifing Authorization token --- [Done]
       jwt.verify(
         token,
-        process.env.ADMIN_JWT_SECRET_KEY,
+        process.env.SUPER_ADMIN_JWT_SECRET_KEY,
         async (err, decoded) => {
           if (err) {
             res
@@ -27,17 +26,17 @@ const AdminAuth = (handler) => async (req, res) => {
               .json({ status: false, Error: "Invaid User session Token" });
             reject();
           } else if (decoded.id) {
-            let admin = await Admin.findOne({ _id: decoded.id });
-            if (admin) {
+            let superAdmin = await SuperAdmin.findOne({ _id: decoded.id });
+            if (superAdmin) {
               console.log("Verified")
-              req.adminId = decoded.id;
+              req.superAdminId = decoded.id;
               handler(req, res);
               resolve();
             }
             // else {
             //   return res
             //     .status(401)
-            //     .json({ status: false, Error: "Invalid admin Session" });
+            //     .json({ status: false, Error: "Invalid superAdmin Session" });
             // }
           }
         }

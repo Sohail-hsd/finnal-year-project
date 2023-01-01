@@ -5,7 +5,7 @@ mongoose.set('strictQuery', true);
 
 const connectDB = handler => async (req, res) => {
     if (mongoose.connection.readyState) {
-        console.log("Connection")
+        console.log("Already Connected")
         return handler(req, res)
     }
     mongoose.connect(process.env.MONGO_URI)
