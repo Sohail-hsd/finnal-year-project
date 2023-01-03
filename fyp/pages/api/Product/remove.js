@@ -15,8 +15,8 @@ const handler = async (req, res) => {
           await Product.findByIdAndDelete(req.body[i].id);
         }
         return res.status(200).json({ status: "Delete Success" });
-      } else if (!req.body && id) {
-        await Product.findByIdAndDelete({ id });
+      } else if (id) {
+        await Product.findByIdAndDelete(id);
         return res.status(200).json({ status: "Delete Success" });
       }
     } catch (error) {

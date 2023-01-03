@@ -91,12 +91,12 @@ const handler = async (req, res) => {
 
     // Initiate an Order, Coressponding ot this OrderId. --- [Done]
     try {
-      // console.log(Math.random(30))
+      let orderId = makeid(24);
       let order = new Order({
         email: req.body.email,
         name: req.body.name,
         phone: req.body.phone,
-        orderID: req.body.orderID,
+        orderID: orderId,
         address: `${req.body.district}, ${req.body.state}, ${req.body.address}`,
         city: req.body.district,
         state: req.body.state,
@@ -109,7 +109,7 @@ const handler = async (req, res) => {
       await order.save();
 
       return res.redirect(
-        `${process.env.NEXT_PUBLIC_HOST}/api/Payment/post-payment/?orderID=${req.body.orderID}`,
+        `${process.env.NEXT_PUBLIC_HOST}/api/Payment/post-payment/?orderID=${orderId}`,
         200
       );
       // return res.status(200).json({ status: "Order Initiated" })
@@ -118,5 +118,16 @@ const handler = async (req, res) => {
     }
   }
 };
+
+function makeid(length) {
+  var result = "";
+  var characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  var charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+}
 
 export default connectDB(Auth(handler));
