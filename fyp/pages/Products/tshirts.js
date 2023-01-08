@@ -44,7 +44,7 @@ const Tsharts = ({ products }) => {
                     <h2 className="text-white title-font text-lg font-medium">
                       {products[item].title}
                     </h2>
-                    <p className="mt-1">${products[item].price}</p>
+                    <p className="mt-1">${products[item].price.toFixed(2)}</p>
                     <div className="mt-2">
                       {/* {console.log(products[item].size)} */}
                       {products[item].size.includes("S") && (

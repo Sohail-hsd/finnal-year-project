@@ -91,7 +91,7 @@ const handler = async (req, res) => {
 
     // Initiate an Order, Coressponding ot this OrderId. --- [Done]
     try {
-      let orderId = makeid(24);
+      let orderId = Math.floor(Math.random() * Date.now())
       let order = new Order({
         email: req.body.email,
         name: req.body.name,
@@ -119,15 +119,15 @@ const handler = async (req, res) => {
   }
 };
 
-function makeid(length) {
-  var result = "";
-  var characters =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  var charactersLength = characters.length;
-  for (var i = 0; i < length; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
-  }
-  return result;
-}
+// function makeid(length) {
+//   var result = "";
+//   var characters =
+//     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+//   var charactersLength = characters.length;
+//   for (var i = 0; i < length; i++) {
+//     result += characters.charAt(Math.floor(Math.random() * charactersLength));
+//   }
+//   return result;
+// }
 
 export default connectDB(Auth(handler));

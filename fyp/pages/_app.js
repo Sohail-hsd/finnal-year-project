@@ -12,7 +12,7 @@ function MyApp({ Component, pageProps }) {
   const [key, setKey] = useState();
   const [user, setUser] = useState({ value: null });
   const [progress, setProgress] = useState(0);
-  
+
   const router = useRouter();
 
   useEffect(() => {
@@ -150,7 +150,19 @@ function MyApp({ Component, pageProps }) {
           cart={cart}
         />
       )}
-       <Component {...pageProps} getUser={getUser} calculateSubtotal={calculateSubtotal} user={user} addToCart={addToCart} removeFromCart={removeFromCart} clearCart={clearCart} SubTotal={SubTotal} saveCart={saveCart} cart={cart} buyNow={buyNow} {...pageProps} />
+      <Component
+        {...pageProps}
+        getUser={getUser}
+        calculateSubtotal={calculateSubtotal}
+        user={user}
+        addToCart={addToCart}
+        removeFromCart={removeFromCart}
+        clearCart={clearCart}
+        SubTotal={SubTotal}
+        saveCart={saveCart}
+        cart={cart}
+        buyNow={buyNow}
+      />
     </>
   );
 }

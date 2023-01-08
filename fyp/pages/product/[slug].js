@@ -239,19 +239,11 @@ const Products = ({ addToCart, product, varients, buyNow, error }) => {
                   <span className="mr-3">Color</span>
                   {size &&
                     Object.keys(varients[size]).map((itemColor) => {
-                      // console.log(size + "  " + itemColor);
                       return (
                         <button
                           onClick={() => refVarient(itemColor, size)}
-                          className={`border-2 ml-1 bg-${itemColor}-700 rounded-full w-6 h-6 focus:outline-none transition ease-in-out hover:-translate-y-0.5 hover:scale-110 duration-150 
-                    ${
-                      itemColor == color && itemColor != "white"
-                        ? "scale-125 border-white"
-                        : "border-gray-700"
-                    }
-                    ${
-                      itemColor == "black" ? "border-black" : "border-gray-700"
-                    }`}
+                          style={{ backgroundColor: itemColor }}
+                          className={`border-2 ml-1 opacity-70 rounded-full w-6 h-6 focus:outline-none transition ease-in-out hover:-translate-y-0.5 hover:scale-110 duration-150`}
                         ></button>
                       );
                     })}
@@ -307,7 +299,7 @@ const Products = ({ addToCart, product, varients, buyNow, error }) => {
               {product.availableQty > 0 ? (
                 <div className="flex">
                   <span className="title-font font-medium text-2xl text-white">
-                    ${product.price}
+                    ${product.price.toFixed(2)}
                   </span>
 
                   <button

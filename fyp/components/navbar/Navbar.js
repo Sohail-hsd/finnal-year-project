@@ -15,6 +15,7 @@ import { MdAccountCircle } from "react-icons/md";
 import { ToastContainer, toast } from "react-toastify";
 import { useRouter } from "next/router";
 import Search from "../twe/Search";
+import DropDown from "./DropDown";
 
 const Navbar = ({
   cart,
@@ -30,6 +31,7 @@ const Navbar = ({
   const [dropDown, setdropDown] = useState(false);
   const [notification, setNotification] = useState(false);
   const [sideCart, setSideCart] = useState(false);
+  const [Links, setLinks] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -92,6 +94,9 @@ const Navbar = ({
       </div>
       <div className="nav">
         <ul className="flex items-center space-x-6 mt-3 font-bold md:text-md px-10   text-[#34251F]">
+          <div>
+            <DropDown />
+          </div>
           <Link href={"/Products/tshirts"}>
             <p className="transition ease-in-out hover:-translate-y-0.5 hover:scale-110 duration-150 hover:text-blue-400">
               <li>T-Shirts</li>
@@ -115,9 +120,9 @@ const Navbar = ({
         </ul>
       </div>
 
-        <div className="top-7 px-7 font-bold md:text-md   text-[#34251F]">
-          <Search/>
-        </div>
+      <div className="top-7 px-7 font-bold md:text-md   text-[#34251F]">
+        <Search />
+      </div>
 
       <div
         ref={ref}
@@ -204,7 +209,7 @@ const Navbar = ({
                         All Orders
                       </li>
                     </Link>
-                    <Link href={"/account"}>
+                    <Link href={"/Admin"}>
                       <li className="transition ease-in-out hover:-translate-y-0.5 hover:scale-110 duration-150 py-1 text-sm hover:text-blue-600 font-bold">
                         Setting
                       </li>

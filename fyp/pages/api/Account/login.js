@@ -13,7 +13,7 @@ export const handler = async (req, res) => {
   if (req.method == "POST") {
     try {
       const { email, password } = req.body;
-      if (email, password) {
+      if ((email, password)) {
         let user = await User.findOne({ email: email });
         if (user) {
           const bytes = CryptoJS.AES.decrypt(
@@ -27,14 +27,12 @@ export const handler = async (req, res) => {
               { email: user.email, id: user._id, name: user.name },
               `${process.env.JWT_SECRET_KEY}`
             );
-            return res
-              .status(200)
-              .json({
-                status: true,
-                email: user.email,
-                name: user.name,
-                token,
-              });
+            return res.status(200).json({
+              status: true,
+              email: user.email,
+              name: user.name,
+              token,
+            });
           }
 
           return res

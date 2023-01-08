@@ -1,14 +1,15 @@
-import Head from 'next/head'
-import React, {useEffect} from 'react'
+import Head from "next/head";
+import React, { useEffect } from "react";
+import Header from "../components/header/Header";
+import CardSlide from "../components/header/CardSlide";
 
-export default function Home({getUser}) {
+export default function Home({ getUser }) {
   useEffect(() => {
-
     return () => {
       getUser();
-    }
-  }, [])
-  
+    };
+  }, []);
+
   return (
     <>
       <Head>
@@ -17,15 +18,17 @@ export default function Home({getUser}) {
         <link rel="icon" href="/logo.ico" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet"/>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap"
+          rel="stylesheet"
+        />
         <script src="./TW-ELEMENTS-PATH/dist/js/index.min.js"></script>
       </Head>
 
-      <main>
-        <h1 className='text-blue-300 text-4xl font-sati font-bold' >hi threr!</h1>
+      <main className="">
+        <Header />
+        <CardSlide/>
       </main>
-
-      
     </>
-  )
+  );
 }
