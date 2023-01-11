@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 html,
 body {
   padding: 0;
@@ -19,8 +23,42 @@ a {
   html {
     color-scheme: dark;
   }
+
   body {
-    color: white;
-    background: black;
+    color: black;
+    /* background: rgba(255, 255, 255, 1); */
+    background: #ffff;
+
   }
+}
+
+.hh {
+  height: inherit;
+}
+
+.prisim {
+  backdrop-filter: saturate(180%) blur(3px);
+  background: hsla(0, 0%, 100%, .8);
+  /* background: transparent; */
+}
+
+
+.green-pic {
+  filter: grayscale(0%) brightness(120%) sepia(598%) hue-rotate(50deg) saturate(1200%)
+}
+
+/* .infoInputs:invalid:not(:focus)  ~ .errMsg {
+  display: block;
+} */
+
+.infoInputs:invalid[focused="true"]~.errMsg {
+  display: block;
+}
+
+.infoInputs:invalid[focused="true"] {
+  border: 2px solid rgb(214, 67, 62);
+}
+
+.infoInputs:valid:focus {
+  border: 2px solid rgb(39, 140, 207);
 }

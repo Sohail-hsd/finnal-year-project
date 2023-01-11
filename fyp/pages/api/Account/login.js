@@ -13,7 +13,7 @@ export const handler = async (req, res) => {
   if (req.method == "POST") {
     try {
       const { email, password } = req.body;
-      if (email, password) {
+      if ((email, password)) {
         let user = await User.findOne({ email: email });
         if (user) {
           const bytes = CryptoJS.AES.decrypt(
@@ -24,17 +24,21 @@ export const handler = async (req, res) => {
           // console.log(decryptedPassword)
           if (req.body.password === decryptedPassword) {
             const token = jwt.sign(
-              { email: user.email, id: user._id, name: user.name },
+              {
+                email: user.email,
+                id: user._id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+              },
               `${process.env.JWT_SECRET_KEY}`
             );
-            return res
-              .status(200)
-              .json({
-                status: true,
-                email: user.email,
-                name: user.name,
-                token,
-              });
+            return res.status(200).json({
+              status: true,
+              email: user.email,
+              firstName: user.firstName,
+              lastName: user.lastName,
+              token,
+            });
           }
 
           return res

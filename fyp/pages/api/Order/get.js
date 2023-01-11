@@ -30,7 +30,7 @@ const handler = async (req, res) => {
         } else if (req.query.all) {
           orders = await Order.find({
             userId: req.userId,
-          });
+          }).sort({timestamps: -1});
         }
 
         if (orders) return res.status(200).json({ status: true, orders });

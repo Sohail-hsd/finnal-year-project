@@ -10,26 +10,28 @@ const handler = async (req, res) => {
     try {
       const { id } = req.query;
       console.log(req.adminId);
+      console.log(req.body)
       if (req.body && !id) {
-        let updated;
-        for (let i = 0; i < req.body.length; i++) {
-          updated = await Product.findByIdAndUpdate(req.body[i]._id, req.body[i]);
-        }
-        res.status(200).json({ status: "Updated Success", updated });
+      //   let updated;
+      //   for (let i = 0; i < req.body.length; i++) {
+      //     updated = await Product.findByIdAndUpdate(req.body[i]._id, req.body[i]);
+      //   }
+      //  return  res.status(200).json({ status:true,message: "Updated Success" });
       } else if (req.body && id) {
-        let updated = await Product.findByIdAndUpdate(id, req.body[0]);
-        return res.status(200).json({ status: "Updated Success",updated });
+        let updated = await Product.findByIdAndUpdate(id, req.body);
+        // console.log(updated)
+        return res.status(200).json({ status:true, message: "Updated Success", updated });
       }
     } catch (error) {
       console.error(error);
       return res
         .status(401)
-        .json({ Error: "Invalid request to (updateProducts)", error: error });
+        .json({ Error: "Invalid request to (updateProducts)", status: false });
     }
   } else
     return res
       .status(400)
-      .json({ Error: "Invalid request to method (updateProducts)" });
+      .json({ Error: "Invalid request to method (updateProducts)", status:false });
 };
 
 export default connectDB(AdminAuth(handler));

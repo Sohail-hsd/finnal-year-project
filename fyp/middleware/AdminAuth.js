@@ -10,7 +10,7 @@ mongoose.set("strictQuery", true);
 // Step # 4 : If token is not verified, Return Error.
 
 const AdminAuth = (handler) => async (req, res) => {
-  const { authorization } = req.body;
+  // const { authorization } = req.headers;
   // if (req.method == 'POST') {
   try {
     console.log("Admin-Auth");
@@ -31,14 +31,15 @@ const AdminAuth = (handler) => async (req, res) => {
             if (admin) {
               console.log("Verified")
               req.adminId = decoded.id;
+              // console.log(req.adminId)
               handler(req, res);
               resolve();
             }
-            // else {
-            //   return res
-            //     .status(401)
-            //     .json({ status: false, Error: "Invalid admin Session" });
-            // }
+            else {
+              return res
+                .status(403)
+                .json({ status: false, Error: "Invalid admin Session" });
+            }
           }
         }
       );

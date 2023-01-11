@@ -14,10 +14,10 @@ const handler = async (req, res) => {
         for (let i = 0; i < req.body.length; i++) {
           await Product.findByIdAndDelete(req.body[i].id);
         }
-        return res.status(200).json({ status: "Delete Success" });
+        return res.status(200).json({ status: true, message: "Delete Success" });
       } else if (id) {
         await Product.findByIdAndDelete(id);
-        return res.status(200).json({ status: "Delete Success" });
+        return res.status(200).json({ status: true, message: "Delete Success" });
       }
     } catch (error) {
       console.error(error);
