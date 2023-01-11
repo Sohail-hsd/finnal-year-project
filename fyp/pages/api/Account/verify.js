@@ -16,9 +16,10 @@ const handler = (req, res) => {
         } else if (decoded.id) {
         //   req.userId = decoded.id;
           console.log("Authorized");
+          // console.log(first)
           res
             .status(200)
-            .json({ status: true, email: decoded.email, name: decoded.name });
+            .json({ status: true, email: decoded.email, name: decoded.firstName + " " + decoded.lastName });
           resolve();
         }
       });

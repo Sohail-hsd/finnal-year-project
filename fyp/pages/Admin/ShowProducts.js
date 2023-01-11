@@ -19,10 +19,10 @@ const AllProducts = ({ tshirt, hoddies, mugs, stickers }) => {
             <ThemeProvider theme={theme}>
                 <CssBaseline >
                     <FullLayout>
-                        <AllProductsTable products={tshirt} title={"T-Shirts"} />
-                        <AllProductsTable products={hoddies} title={"Hoddies"} />
-                        <AllProductsTable products={mugs} title={"Mugs"} />
-                        <AllProductsTable products={stickers} title={"Stickers"} />
+                        <AllProductsTable Products={tshirt} title={"T-Shirts"} />
+                        <AllProductsTable Products={hoddies} title={"Hoddies"} />
+                        <AllProductsTable Products={mugs} title={"Mugs"} />
+                        <AllProductsTable Products={stickers} title={"Stickers"} />
                     </FullLayout>
                 </CssBaseline>
             </ThemeProvider>

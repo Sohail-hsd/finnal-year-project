@@ -110,7 +110,7 @@ export async function getServerSideProps(context) {
   if (!mongoose.connection.readyState) {
     await mongoose.connect(process.env.MONGO_URI);
   }
-  let products = await Product.find({ category: "T-shirt" });
+  let products = await Product.find({ category: "T-shirt" }).sort({_id:-1});
   // let products = await Product.find({'availableQty': {$ne : 0}, category:"T-shirt"})
   let tshirts = {};
   // Loop though all products {T-shirt},

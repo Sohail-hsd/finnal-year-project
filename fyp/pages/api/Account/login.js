@@ -24,13 +24,19 @@ export const handler = async (req, res) => {
           // console.log(decryptedPassword)
           if (req.body.password === decryptedPassword) {
             const token = jwt.sign(
-              { email: user.email, id: user._id, name: user.name },
+              {
+                email: user.email,
+                id: user._id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+              },
               `${process.env.JWT_SECRET_KEY}`
             );
             return res.status(200).json({
               status: true,
               email: user.email,
-              name: user.name,
+              firstName: user.firstName,
+              lastName: user.lastName,
               token,
             });
           }

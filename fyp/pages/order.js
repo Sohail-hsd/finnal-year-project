@@ -152,12 +152,12 @@ const MyOrder = ({ order }) => {
                         scope="row"
                         className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                       >
-                        {products[item].title} ( {products[item].size} )
+                        {products[item].name} ( {products[item].size} )
                       </th>
                       <td className="py-4 px-6">
                         {/* {products[item].varient} */}
                         <button
-                        style={{backgroundColor: products[item].color}}
+                        style={{backgroundColor: products[item].varient}}
                           className={`border-2 ml-1 rounded-full w-6 h-6 focus:outline-none ${
                             products[item].color == "black"
                               ? "border-white"

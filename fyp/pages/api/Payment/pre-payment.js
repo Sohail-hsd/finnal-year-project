@@ -10,6 +10,7 @@ const handler = async (req, res) => {
     let product,
       sumTotal = 0;
     let cart = req.body.cart;
+    console.log(cart)
     for (let item in cart) {
       sumTotal = cart[item].price * cart[item].qty;
       product = await Product.findOne({ slug: item });
@@ -32,7 +33,7 @@ const handler = async (req, res) => {
           .json({
             success: false,
             error:
-              "The price of some products in  your cart is changed. Please try again",
+              "The price of some products in  your cart is changed. Please try again!",
           });
       }
     }
@@ -47,7 +48,7 @@ const handler = async (req, res) => {
     //       error: "The pin code you have enter is not serviceable.",
     //     });
     // }
-    console.log(sumTotal !== req.body.SubTotal)
+    console.log(sumTotal, req.body.SubTotal)
     if (sumTotal !== req.body.SubTotal) {
       return res
       .status(403)
@@ -55,7 +56,7 @@ const handler = async (req, res) => {
         success: false,
         cart: "clear",
         error:
-        "The price of some products in  your cart is changed. Please try again",
+        "The price of some products in  your cart is changed. Please try again !!",
       });
     }
     // if (req.body.SubTotal <= 0) {
@@ -67,7 +68,8 @@ const handler = async (req, res) => {
         //       error: "Please, Build your cart and try again.",
         //     });
         // }
-        console.log(req.body.phone.length < 11 ||
+
+        console.log(req.body.phone.length < 11 &&
           !Number.isInteger(Number(req.body.phone)))
         if (
           req.body.phone.length < 11 ||
@@ -80,8 +82,8 @@ const handler = async (req, res) => {
           error: "Please, Enter a valid phone number of 11 digits.",
         });
     }
-    console.log(req.body.pin.length > 5 || !Number.isInteger(Number(req.body.pin)))
-    if (req.body.pin.length > 5 || !Number.isInteger(Number(req.body.pin))) {
+    console.log(req.body.postalCode.length > 5 || !Number.isInteger(Number(req.body.pin)))
+    if (req.body.postalCode.length > 5 || !Number.isInteger(Number(req.body.postalCode))) {
       return res
         .status(403)
         .json({ success: false, error: "Please, Provide a valid pin code." });
@@ -94,14 +96,18 @@ const handler = async (req, res) => {
       let orderId = Math.floor(Math.random() * Date.now())
       let order = new Order({
         email: req.body.email,
-        name: req.body.name,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        name: req.body.lastName,
         phone: req.body.phone,
         orderID: orderId,
-        address: `${req.body.district}, ${req.body.state}, ${req.body.address}`,
-        city: req.body.district,
+        address: req.body.address,
+        apartment: req.body.apartment,
+        city: req.body.city,
         state: req.body.state,
-        areaPinCode: req.body.pin,
+        postalCode: req.body.postalCode,
         amount: req.body.SubTotal,
+        country: req.body.country,
         products: req.body.cart,
         status: "Initiate",
         userId:req.userId

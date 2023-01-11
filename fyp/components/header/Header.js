@@ -52,7 +52,7 @@ const Header = () => {
             </div>
           </div>
           {/* Single item */}
-          {/* <div className="carousel-item relative float-left w-full">
+          <div className="carousel-item relative float-left w-full">
             <img
               src="https://mdbcdn.b-cdn.net/img/Photos/Slides/img%20(35).webp"
               className="block w-full"
@@ -64,7 +64,7 @@ const Header = () => {
                 Some representative placeholder content for the second slide.
               </p>
             </div>
-          </div> */}
+          </div>
           {/* Single item */}
           {/* <div className="carousel-item relative float-left w-full">
             <img

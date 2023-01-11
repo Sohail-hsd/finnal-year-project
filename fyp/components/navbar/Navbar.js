@@ -284,16 +284,7 @@ const Navbar = ({
                 <div className="icon  flex justify-center items-center w-1/3 text-xl space-x-2">
                   <AiFillMinusCircle
                     className="cursor-pointer"
-                    onClick={() =>
-                      removeFromCart(
-                        item,
-                        cart[item].name,
-                        cart[item].prise,
-                        cart[item].size,
-                        cart[item].varient,
-                        1
-                      )
-                    }
+                    onClick={() => removeFromCart(item, 1)}
                   />
                   <span className="font-bold text-2xl">{cart[item].qty}</span>
                   <AiFillPlusCircle
@@ -305,7 +296,8 @@ const Navbar = ({
                         cart[item].prise,
                         cart[item].size,
                         cart[item].varient,
-                        1
+                        1,
+                        cart[item].img
                       )
                     }
                   />
@@ -327,10 +319,10 @@ const Navbar = ({
 
         {Object.keys(cart).length != 0 && (
           <div className="flex mt-5">
-            <Link href={"/checkout"}>
+            <Link href={user.status ? "/checkout" : "/login"}>
               <button
                 onClick={activeCart}
-                className="flex mr-2   text-[#34251F] font-bold bg-blue-500 border-0 py-2 px-2 focus:outline-none hover:bg-blue-600 rounded text-sm"
+                className="flex mr-2 text-[#34251F] font-bold bg-blue-500 border-0 py-2 px-2 focus:outline-none hover:bg-blue-600 rounded text-sm"
               >
                 Checkout <BsFillBagCheckFill className="mt-1 ml-2" />
               </button>

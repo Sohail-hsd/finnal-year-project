@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import { wrapper } from "../store/store";
 import Navbar from "../components/navbar/Navbar";
+import Footer from "../components/home/Footer";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import "react-toastify/dist/ReactToastify.css";
@@ -96,26 +97,48 @@ function MyApp({ Component, pageProps }) {
     setSubTotal(subt);
   };
 
-  const addToCart = (itemCode, name, price, size, varient, qty) => {
+  const addToCart = (itemCode, name, price, size, varient, qty, img) => {
+    console.log("add to cart");
     let newCart = cart;
+    console.log(qty)
     if (itemCode in cart) {
-      cart[itemCode].qty = cart[itemCode].qty + qty;
+      console.log(typeof(cart[itemCode].qty))
+      cart[itemCode].qty = Number(cart[itemCode].qty) + qty;
     } else {
-      newCart[itemCode] = { qty: 1, price, name, size, varient };
+      newCart[itemCode] = { qty: 1, price, name, size, varient, img };
     }
     setcart(newCart);
     saveCart(newCart);
   };
 
-  const removeFromCart = (itemCode, name, price, size, varient, qty) => {
+  const updateCart = (itemCode, qty) => {
+    console.log("Update to cart");
+    let newCart = cart;
+    if (itemCode in cart) {
+      cart[itemCode].qty = Number(qty);
+    }
+    setcart(newCart);
+    saveCart(newCart);
+  };
+
+  const removeFromCart = (itemCode, qty) => {
     console.log("remove From Cart");
+    console.log(itemCode, qty);
     let newCart = JSON.parse(JSON.stringify(cart));
+    console.log(newCart[itemCode].qty <= 0);
     if (itemCode in cart) {
       newCart[itemCode].qty = cart[itemCode].qty - qty;
     }
     if (newCart[itemCode].qty <= 0) {
       delete newCart[itemCode];
     }
+    setcart(newCart);
+    saveCart(newCart);
+  };
+  const deleteFromCart = (itemCode) => {
+    console.log("delete From Cart");
+    let newCart = JSON.parse(JSON.stringify(cart));
+    delete newCart[itemCode];
     setcart(newCart);
     saveCart(newCart);
   };
@@ -153,9 +176,11 @@ function MyApp({ Component, pageProps }) {
       <Component
         {...pageProps}
         getUser={getUser}
+        updateCart={updateCart}
         calculateSubtotal={calculateSubtotal}
         user={user}
         addToCart={addToCart}
+        deleteFromCart={deleteFromCart}
         removeFromCart={removeFromCart}
         clearCart={clearCart}
         SubTotal={SubTotal}
@@ -163,6 +188,7 @@ function MyApp({ Component, pageProps }) {
         cart={cart}
         buyNow={buyNow}
       />
+      <Footer />
     </>
   );
 }

@@ -1,12 +1,28 @@
 import Head from "next/head";
 import React, { useEffect } from "react";
-import Header from "../components/header/Header";
+// import Header from "../components/header/Header";
 import CardSlide from "../components/header/CardSlide";
+// import Navbar from "../components/home/Navbar";
+import Header from "../components/home/Header";
+import NewCollections from "../components/home/NewCollections";
+import BestSeller from "../components/home/BestSeller";
+import OurProducts from "../components/home/OurProducts";
+import Reviews from "../components/home/Reviews";
+import Policies from "../components/home/Policies";
+import Footer from "../components/home/Footer";
+import Newsletter from "../components/home/Newsletter";
 
 export default function Home({ getUser }) {
   useEffect(() => {
     return () => {
-      getUser();
+      let subscribe = true;
+      if (subscribe) {
+        getUser();
+      }
+
+      return () => {
+        subscribe = true;
+      };
     };
   }, []);
 
@@ -26,8 +42,14 @@ export default function Home({ getUser }) {
       </Head>
 
       <main className="">
+        {/* <Navbar /> */}
         <Header />
-        <CardSlide/>
+        <NewCollections />
+        <BestSeller />
+        <OurProducts />
+        <Reviews />
+        <Policies />
+        <Newsletter />
       </main>
     </>
   );

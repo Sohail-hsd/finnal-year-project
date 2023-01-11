@@ -27,9 +27,13 @@ a {
   body {
     color: black;
     /* background: rgba(255, 255, 255, 1); */
-    background: #34251F;
+    background: #ffff;
 
   }
+}
+
+.hh {
+  height: inherit;
 }
 
 .prisim {
@@ -52,9 +56,9 @@ a {
 }
 
 .infoInputs:invalid[focused="true"] {
-  border: 2px solid rgb(202, 46, 46);
+  border: 2px solid rgb(214, 67, 62);
 }
 
 .infoInputs:valid:focus {
-  border: 2px solid rgb(87, 207, 39);
+  border: 2px solid rgb(39, 140, 207);
 }

@@ -9,16 +9,21 @@ import {
   Chip,
 } from "@mui/material";
 import BaseCard from "../baseCard/BaseCard";
-import React from "react";
+import React, { useState } from "react";
 import DeleteForeverRoundedIcon from "@mui/icons-material/DeleteForeverRounded";
 import SystemUpdateAltRoundedIcon from "@mui/icons-material/SystemUpdateAltRounded";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import PopOver from "../../../components/dashboard/PopOver";
 
-const AllProducts = ({ products, varients, title }) => {
+const AllProducts = ({ Products, varients, title }) => {
   let id = 1;
+  const [Pop, setPop] = useState(false);
+  const [Check, setCheck] = useState(false);
+  const [products, setproducts] = useState(Products)
   const router = useRouter();
-  const deleteProduct = async (id) => {
+
+  const deleteProduct = async (id, index) => {
     const token = localStorage.getItem("Atoken");
     let response = await fetch(
       `${process.env.NEXT_PUBLIC_HOST}/api/Product/remove?id=${id}`,
@@ -32,6 +37,15 @@ const AllProducts = ({ products, varients, title }) => {
     );
     response = await response.json();
     console.log(response);
+    if(response.status == true){
+    console.log(index - 2);
+    console.log(products[index - 2]);
+    delete products[index - 2]
+    console.log(products[index - 2]);
+    // setproducts({...products,[index - 2]:null})
+    window.location.reload(true)
+    }
+
     // useRouter({/})
   };
 
@@ -95,7 +109,7 @@ const AllProducts = ({ products, varients, title }) => {
         <TableBody>
           {products.map((product) => {
             return (
-              <TableRow key={product.slug}>
+              <TableRow key={product._id}>
                 <TableCell>
                   <Typography
                     sx={{
@@ -156,10 +170,10 @@ const AllProducts = ({ products, varients, title }) => {
                 <TableCell>
                   <Typography color="textSecondary" variant="h6">
                     <img
-                    style={{borderRadius:10}}
+                      style={{ borderRadius: 10 }}
                       src={
-                        product.img.length < 20
-                          ? `../Products/${product.img}`
+                        product.img.length < 40
+                          ? `../../Products/${product.img}`
                           : product.img
                       }
                       width={"30px"}
@@ -200,11 +214,17 @@ const AllProducts = ({ products, varients, title }) => {
                 </TableCell>
                 <TableCell>
                   <Typography variant="h6">
-                    <span onClick={() => deleteProduct(product._id)}>
-                      <DeleteForeverRoundedIcon
-                        sx={{ color: "error.main", cursor: "pointer" }}
-                      />
-                    </span>
+                    {/* <span onClick={() => deleteProduct(product._id, id)}> */}
+                    <PopOver
+                      pop={Pop}
+                      title={"Delete Alert!"}
+                      deleteProduct={deleteProduct}
+                      message={"Are you sure to delete this product, this will parmanently delete this product."}
+                      id={product._id}
+                      index={id}
+                    />
+
+                    {/* </span> */}
                   </Typography>
                 </TableCell>
                 <TableCell>

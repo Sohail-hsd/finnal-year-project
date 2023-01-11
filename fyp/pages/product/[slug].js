@@ -35,11 +35,11 @@ const Products = ({ addToCart, product, varients, buyNow, error }) => {
   };
 
   const refVarient = (newColor, newSize) => {
-    console.log(newSize, newColor);
-    console.log(varients);
-    console.log(varients[newSize][newColor]);
+    // console.log(newSize, newColor);
+    // console.log(varients);
+    // console.log(varients[newSize][newColor]);
     // console.log(varients[newSize][newColor[0]]['slug'])
-    console.log(typeof newColor);
+    // console.log(typeof newColor);
     if (typeof newColor == "object") {
       let url = `${process.env.NEXT_PUBLIC_HOST}/product/${
         varients[newSize][newColor[0]]["slug"]
@@ -116,11 +116,15 @@ const Products = ({ addToCart, product, varients, buyNow, error }) => {
           <div className="lg:w-4/5 mx-auto flex flex-wrap">
             {/* <img alt="ecommerce" className="lg:w-1/2 w-full lg:h-auto h-64 object-cover object-center rounded" src="https://dummyimage.com/400x400"/> */}
             <img
-              alt="ecommerce"
-              className="lg:w-1/2 w-full lg:h-auto px- object-cover object-top rounded-2xl shadow-md shadow-blue-500"
-              src={product.img}
-              // width={300}
-              // height={400}
+              className="lg:w-1/2 w-full lg:h-full object-cover object-top rounded-2xl shadow-md shadow-blue-500"
+              src={
+                product.img.length < 40
+                  ? `../../Products/${product.img}`
+                  : product.img
+              }
+              alt={product.category}
+              width={300}
+              height={400}
             />
             <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
               <h2 className="text-sm title-font text-gray-500 tracking-widest">
@@ -297,8 +301,8 @@ const Products = ({ addToCart, product, varients, buyNow, error }) => {
               </div>
 
               {product.availableQty > 0 ? (
-                <div className="flex">
-                  <span className="title-font font-medium text-2xl text-white">
+                <div className="flex flex-wrap">
+                  <span className="title-font font-medium text-xl text-white">
                     ${product.price.toFixed(2)}
                   </span>
 
@@ -311,7 +315,8 @@ const Products = ({ addToCart, product, varients, buyNow, error }) => {
                         product.price,
                         product.size,
                         product.color,
-                        1
+                        1,
+                        product.img
                       )
                     }
                     className="flex ml-10 text-white bg-green-500 border-0 py-2 px-2 md:px-3 md:ml-20 focus:outline-none hover:bg-green-600 rounded disabled:bg-green-300"
@@ -329,7 +334,8 @@ const Products = ({ addToCart, product, varients, buyNow, error }) => {
                         product.price,
                         product.size,
                         product.color,
-                        1
+                        1,
+                        product.img
                       )
                     }
                     disabled={product.availableQty <= 0 && true}
