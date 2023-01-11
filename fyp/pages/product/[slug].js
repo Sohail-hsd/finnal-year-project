@@ -303,7 +303,7 @@ const Products = ({ addToCart, product, varients, buyNow, error }) => {
               {product.availableQty > 0 ? (
                 <div className="flex flex-wrap">
                   <span className="title-font font-medium text-xl text-white">
-                    ${product.price.toFixed(2)}
+                    Pkr {product.price.toFixed(2)}
                   </span>
 
                   <button

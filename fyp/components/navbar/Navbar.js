@@ -31,7 +31,6 @@ const Navbar = ({
   const [dropDown, setdropDown] = useState(false);
   const [notification, setNotification] = useState(false);
   const [sideCart, setSideCart] = useState(false);
-  const [Links, setLinks] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -279,7 +278,7 @@ const Navbar = ({
             <li key={item}>
               <div className="item flex my-5">
                 <div className="w-2/3 ml-1 font-semibold">
-                  {cart[item].name} / {cart[item].varient} ({cart[item].size})
+                  {cart[item].name}
                 </div>
                 <div className="icon  flex justify-center items-center w-1/3 text-xl space-x-2">
                   <AiFillMinusCircle
@@ -312,7 +311,7 @@ const Navbar = ({
         {Object.keys(cart).length != 0 && (
           <div className="sub-total">
             <h3 className="font-semibold">
-              Total Price : <span className="font-bold">{SubTotal} </span>$
+              Total Price : <span className="font-bold">Pkr {SubTotal} </span>
             </h3>
           </div>
         )}

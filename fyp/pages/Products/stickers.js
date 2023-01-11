@@ -18,7 +18,7 @@ const Stickers = ({ products }) => {
             {Object.keys(products).map((item) => (
               <Link
                 key={products[item]._id}
-                href={`/products/${products[item].slug}`}
+                href={`/product/${products[item].slug}`}
               >
                 <div className="lg:w-60 md:w-1/2 p-4 w-full cursor-pointer shadow-lg shadow-green-900 m-5 ">
                   <a className="block rounded overflow-hidden">
